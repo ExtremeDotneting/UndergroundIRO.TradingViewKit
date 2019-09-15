@@ -1,0 +1,18 @@
+<!-- Imported in end of csproj. Here better to override some items. -->
+<Project>
+
+  <PropertyGroup Condition="$(IsNuPackage)">
+    <PackageIconUrl>https://gitlab.com/KogerCoder/sharedresources/raw/master/underground_iro_nuget_logo.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NoWarn>$(NoWarn);1591;1573</NoWarn>
+  </PropertyGroup>
+
+  <!-- Xamarin. -->
+  <PropertyGroup Condition="'$(PackageVersion)' == ''">
+    <PackageVersion>$(AsmVersion_TradingView)</PackageVersion>
+  </PropertyGroup>
+</Project>

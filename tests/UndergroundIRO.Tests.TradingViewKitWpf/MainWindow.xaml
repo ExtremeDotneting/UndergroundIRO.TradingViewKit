@@ -1,0 +1,10 @@
+﻿<Window x:Class="UndergroundIRO.Tests.TradingViewKitWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tradingViewKitWpf="clr-namespace:UndergroundIRO.Tests.TradingViewKitWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="549" Width="1008.5">
+    <tradingViewKitWpf:ConsoleControl x:Name="TerminalControl"></tradingViewKitWpf:ConsoleControl>
+</Window>

@@ -1,0 +1,42 @@
+<!-- Imported before all csproj items. Here better to define variables or default properties. -->
+<Project>
+  <PropertyGroup>
+    <IsTest>false</IsTest>
+    <IsNuPackage>false</IsNuPackage>
+  </PropertyGroup>
+  <PropertyGroup Condition="($(MSBuildProjectName.StartsWith('IRO.Tests')) Or $(MSBuildProjectName.StartsWith('IRO.UnitTests')))">
+    <IsTest>true</IsTest>
+  </PropertyGroup>
+  <PropertyGroup Condition="!$(IsTest)">
+    <IsNuPackage>true</IsNuPackage>
+  </PropertyGroup>
+
+  <!-- Use default settings: comments generation, build packege, etc. -->
+  <PropertyGroup Condition="$(IsNuPackage)">
+    <!-- This two enabled by default in build script. You can configure it for VS. -->
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+	
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <!-- Category versions list. Use it in target projects and to set nuget dependencies. -->
+  <PropertyGroup>
+    <!-- Use current same version for all or define special for category-->
+    <VersionPostfix></VersionPostfix>
+    <AsmVersion_TradingView>1.0.1$(VersionPostfix)</AsmVersion_TradingView>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageVersion>$(AsmVersion_TradingView)</PackageVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DesignTimeBuild Condition="'$(DesignTimeBuild)' == ''">false</DesignTimeBuild>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)output\nuget</PackageOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Me</Authors>
+  </PropertyGroup>
+</Project>
