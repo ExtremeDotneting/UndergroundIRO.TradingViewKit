@@ -15,7 +15,7 @@ namespace UndergroundIRO.TradingViewKit.Core.Entities
         public string Type { get; set; }
 
          [JsonProperty("data")]
-        public ICollection<TradingOverlayItem> Data { get; set; }
+        public IList<TradingOverlayItem> Data { get; set; }
 
          [JsonProperty("settings")]
         public IDictionary<string, object> Settings { get; set; }

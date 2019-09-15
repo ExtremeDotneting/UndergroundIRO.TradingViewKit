@@ -6,12 +6,12 @@ namespace UndergroundIRO.TradingViewKit.Core.Entities
     public class TradingViewChart
     {
         [JsonProperty("ohlcv")]
-        public ICollection<OhlcvItem> Ohlcv { get; set; }
+        public IList<OhlcvItem> Ohlcv { get; set; }
 
         [JsonProperty("onchart")]
-        public ICollection<ChartOverlay> OnChart { get; set; }
+        public IList<ChartOverlay> OnChart { get; set; }
 
         [JsonProperty("offchart")]
-        public ICollection<ChartOverlay> OffChart { get; set; }
+        public IList<ChartOverlay> OffChart { get; set; }
     }
 }

@@ -4,7 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tradingViewKitWpf="clr-namespace:UndergroundIRO.Tests.TradingViewKitWpf"
+        xmlns:wpf="clr-namespace:UndergroundIRO.TradingViewKit.Wpf;assembly=UndergroundIRO.TradingViewKit.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="549" Width="1008.5">
-    <tradingViewKitWpf:ConsoleControl x:Name="TerminalControl"></tradingViewKitWpf:ConsoleControl>
+        Title="MainWindow" Height="549" Width="1008.5" >
+    <Grid>
+        <wpf:TradingViewControl Margin="0,58,0,0" x:Name="TradingViewCtr" ></wpf:TradingViewControl>
+        <TextBox Height="23" Margin="10,10,128,0" TextWrapping="Wrap" VerticalAlignment="Top" x:Name="TextBox1" />
+        <Button Content="Add" Margin="0,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.204,0.7" HorizontalAlignment="Right" Width="99" Height="23" Click="Button_Click"/>
+    </Grid>
 </Window>

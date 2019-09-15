@@ -54,9 +54,9 @@ namespace UndergroundIRO.TradingViewKit.Core
         public bool LoopRefreshEnabled { get; set; } = true;
 
         /// <summary>
-        /// Default is 300 ms.
+        /// Default is 50 ms.
         /// </summary>
-        public TimeSpan LoopRefreshTimeout { get; set; } = TimeSpan.FromMilliseconds(300);
+        public TimeSpan LoopRefreshTimeout { get; set; } = TimeSpan.FromMilliseconds(50);
 
         public event EventHandler Refreshed;
 
