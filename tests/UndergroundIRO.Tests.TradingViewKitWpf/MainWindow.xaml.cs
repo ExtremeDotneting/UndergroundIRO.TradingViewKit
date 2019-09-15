@@ -7,7 +7,6 @@ using IRO.XWebView.Core.Utils;
 using Newtonsoft.Json;
 using UndergroundIRO.TradingViewKit.Core;
 using UndergroundIRO.TradingViewKit.Core.Entities;
-using UndergroundIRO.TradingViewKit.Wpf;
 
 namespace UndergroundIRO.Tests.TradingViewKitWpf
 {
