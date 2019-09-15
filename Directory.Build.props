@@ -18,13 +18,14 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
 	
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	<PackageProjectUrl>https://github.com/KogerCoder/UndergroundIRO.TradingViewKit</PackageProjectUrl>
   </PropertyGroup>
 
   <!-- Category versions list. Use it in target projects and to set nuget dependencies. -->
   <PropertyGroup>
     <!-- Use current same version for all or define special for category-->
     <VersionPostfix></VersionPostfix>
-    <AsmVersion_TradingView>1.0.1$(VersionPostfix)</AsmVersion_TradingView>
+    <AsmVersion_TradingView>1.0.2$(VersionPostfix)</AsmVersion_TradingView>
   </PropertyGroup>
 
   <PropertyGroup>

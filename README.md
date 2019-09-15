@@ -25,7 +25,7 @@ Get started with TradingViewContext, which is an analog of Data object in vue pr
         [JsonProperty("offchart")]
         public IList<ChartOverlay> OffChart { get; set; }
     }
-}
+
 ```
 
 Demo:
