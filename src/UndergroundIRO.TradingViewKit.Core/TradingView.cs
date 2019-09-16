@@ -75,7 +75,7 @@ namespace UndergroundIRO.TradingViewKit.Core
                         await Task.Delay(LoopRefreshTimeout);
                         if (LoopRefreshEnabled)
                         {
-                            var ctx = ThreadSync.Inst.Invoke(() => TypedContext);
+                            var ctx = XWV.ThreadSync.Invoke(() => TypedContext);
                             await RefreshAsync();
                         }
                     }
@@ -99,7 +99,7 @@ namespace UndergroundIRO.TradingViewKit.Core
 
         public async Task RefreshAsync(ViewRefreshType viewRefreshType = ViewRefreshType.NotReloadIfCached)
         {
-            var ctx = ThreadSync.Inst.Invoke(() => TypedContext);
+            var ctx = XWV.ThreadSync.Invoke(() => TypedContext);
             string ctxJson = null;
             var chartJson = JsonConvert.SerializeObject(ctx.Chart);
             var titleJson = JsonConvert.SerializeObject(ctx.Title);
@@ -134,7 +134,7 @@ TradingViewContext.chart = {chartJson} ;
         /// <returns></returns>
         public async Task SetDefaultTimeRange()
         {
-            var ctx = ThreadSync.Inst.Invoke(() => TypedContext);
+            var ctx = XWV.ThreadSync.Invoke(() => TypedContext);
             var from = ctx.Chart.Ohlcv.First().DateTime;
             var to = ctx.Chart.Ohlcv.Last().DateTime;
             await SetTimeRange(from, to);
