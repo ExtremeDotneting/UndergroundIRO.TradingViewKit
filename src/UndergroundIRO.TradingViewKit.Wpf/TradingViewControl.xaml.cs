@@ -49,7 +49,7 @@ namespace UndergroundIRO.TradingViewKit.Wpf
             var xwv = new CefSharpXWebView(control);
             TradingView = new TradingView(xwv);
             Unloaded += delegate { TradingView.Dispose(); };
-            LoadingImageGrid.Visibility = UseSplashScreen ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            LoadingImageGrid.Visibility = UseSplashScreen ? Visibility.Visible : Visibility.Collapsed;
 
             TradingView.Refreshing += async (tv, refreshType) =>
             {
@@ -66,7 +66,7 @@ namespace UndergroundIRO.TradingViewKit.Wpf
             {
                 await tv.XWV.ThreadSync.InvokeAsync(() =>
                 {
-                    LoadingImageGrid.Visibility = System.Windows.Visibility.Collapsed;
+                    LoadingImageGrid.Visibility = Visibility.Collapsed;
                 });
             };
         }
