@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -58,8 +59,6 @@ namespace UndergroundIRO.TradingViewKit.Core
         /// </summary>
         public TimeSpan LoopRefreshTimeout { get; set; } = TimeSpan.FromMilliseconds(50);
 
-        public event EventHandler Refreshed;
-
         public TradingView(IXWebView xwv)
         {
             UnpackResources();
@@ -99,10 +98,12 @@ namespace UndergroundIRO.TradingViewKit.Core
 
         public async Task RefreshAsync(ViewRefreshType viewRefreshType = ViewRefreshType.NotReloadIfCached)
         {
+            await OnRefreshing(this, viewRefreshType);
             var ctx = XWV.ThreadSync.Invoke(() => TypedContext);
             string ctxJson = null;
             var chartJson = JsonConvert.SerializeObject(ctx.Chart);
             var titleJson = JsonConvert.SerializeObject(ctx.Title);
+            var colors = JsonConvert.SerializeObject(ctx.Colors);
             if (viewRefreshType == ViewRefreshType.NotReloadIfCached)
             {
                 ctxJson = JsonConvert.SerializeObject(ctx);
@@ -113,6 +114,7 @@ namespace UndergroundIRO.TradingViewKit.Core
             var script = $@"
 TradingVueObj.titleTxt = {titleJson} ;
 TradingViewContext.chart = {chartJson} ;
+TradingViewContext.colors = {colors} ;
 ";
             await XWV.WaitInitialization();
             if (viewRefreshType == ViewRefreshType.ReloadAllPage)
@@ -125,7 +127,7 @@ TradingViewContext.chart = {chartJson} ;
             }
             await XWV.ExJs<object>(script);
             _previousRefreshJson = ctxJson;
-            Refreshed?.Invoke(this, new EventArgs());
+            await OnRefreshed(this, viewRefreshType);
         }
 
         /// <summary>
@@ -179,5 +181,45 @@ return false;
             );
             await XWV.LoadUrl(path);
         }
+
+        #region Awaitable events.
+        readonly List<Func<ITradingView, ViewRefreshType, Task>> _refreshingEvents = new List<Func<ITradingView, ViewRefreshType, Task>>();
+        public event Func<ITradingView, ViewRefreshType, Task> Refreshing
+        {
+            add { _refreshingEvents.Add(value); }
+            remove { _refreshingEvents.Remove(value); }
+        }
+
+        async Task OnRefreshing(ITradingView sender, ViewRefreshType viewRefreshType)
+        {
+            foreach (var item in _refreshingEvents)
+            {
+                var t = item(sender, viewRefreshType);
+                if (t != null)
+                {
+                    await t;
+                }
+            }
+        }
+
+        readonly List<Func<ITradingView, ViewRefreshType, Task>> _refreshedEvents = new List<Func<ITradingView, ViewRefreshType, Task>>();
+        public event Func<ITradingView, ViewRefreshType, Task> Refreshed
+        {
+            add { _refreshedEvents.Add(value); }
+            remove { _refreshedEvents.Remove(value); }
+        }
+
+        async Task OnRefreshed(ITradingView sender, ViewRefreshType viewRefreshType)
+        {
+            foreach (var item in _refreshedEvents)
+            {
+                var t = item(sender, viewRefreshType);
+                if (t != null)
+                {
+                    await t;
+                }
+            }
+        }
+        #endregion
     }
 }

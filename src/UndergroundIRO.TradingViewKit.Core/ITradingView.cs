@@ -2,12 +2,16 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Threading.Tasks;
+using IRO.XWebView.Core;
+using Newtonsoft.Json.Linq;
 using UndergroundIRO.TradingViewKit.Core.Entities;
 
 namespace UndergroundIRO.TradingViewKit.Core
 {
     public interface ITradingView
     {
+        IXWebView XWV { get; }
+
         TradingViewContext TypedContext { get; set; }
 
         bool IsDisposed { get; set; }
@@ -19,7 +23,15 @@ namespace UndergroundIRO.TradingViewKit.Core
         /// </summary>
         TimeSpan LoopRefreshTimeout { get; set; }
 
-        event EventHandler Refreshed;
+        /// <summary>
+        /// All tasks will be awaited.
+        /// </summary>
+        event Func<ITradingView, ViewRefreshType, Task> Refreshing;
+
+        /// <summary>
+        /// All tasks will be awaited.
+        /// </summary>
+        event Func<ITradingView, ViewRefreshType, Task> Refreshed;
 
         void Dispose();
 
@@ -34,5 +46,7 @@ namespace UndergroundIRO.TradingViewKit.Core
         Task SetTimeRange(DateTime from, DateTime to);
 
         Task SetTimeRange(long fromNum, long toNum);
+
+       
     }
 }

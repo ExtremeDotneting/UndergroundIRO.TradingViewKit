@@ -25,7 +25,7 @@
   <PropertyGroup>
     <!-- Use current same version for all or define special for category-->
     <VersionPostfix></VersionPostfix>
-    <AsmVersion_TradingView>1.0.3$(VersionPostfix)</AsmVersion_TradingView>
+    <AsmVersion_TradingView>1.0.4$(VersionPostfix)</AsmVersion_TradingView>
   </PropertyGroup>
 
   <PropertyGroup>

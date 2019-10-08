@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="549" Width="1008.5" >
     <Grid>
-        <wpf:TradingViewControl Margin="0,58,0,0" x:Name="TradingViewCtr" ></wpf:TradingViewControl>
+        <wpf:TradingViewControl Margin="0,58,0,0" x:Name="TradingViewCtr" UseSplashScreen="True" ></wpf:TradingViewControl>
         <TextBox Height="23" Margin="10,10,128,0" TextWrapping="Wrap" VerticalAlignment="Top" x:Name="TextBox1" />
         <Button Content="Add" Margin="0,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.204,0.7" HorizontalAlignment="Right" Width="99" Height="23" Click="Button_Click"/>
     </Grid>
