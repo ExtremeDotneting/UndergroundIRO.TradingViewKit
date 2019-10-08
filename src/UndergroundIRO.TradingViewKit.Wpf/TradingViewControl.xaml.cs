@@ -1,7 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using IRO.XWebView.CefSharp;
 using IRO.XWebView.CefSharp.Wpf;
 using UndergroundIRO.TradingViewKit.Core;
@@ -23,6 +27,21 @@ namespace UndergroundIRO.TradingViewKit.Wpf
             InitializeComponent();
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
             {
+                try
+                {
+                    var img = new Image();
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(
+                        "https://raw.githubusercontent.com/ExtremeDotneting/UndergroundIRO.TradingViewKit/master/data/splash.jpg",
+                        UriKind.Absolute
+                        );
+                    bitmap.EndInit();
+                    img.Stretch = Stretch.Fill;
+                    img.Source = bitmap;
+                    Content=img;
+                }
+                catch { }
                 return;
             }
             var control = new CefSharpXWebViewControl();
