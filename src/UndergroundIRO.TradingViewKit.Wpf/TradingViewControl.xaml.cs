@@ -21,6 +21,18 @@ namespace UndergroundIRO.TradingViewKit.Wpf
 
         public ITradingView TradingView { get; }
 
+        public bool LoadSplashScreenVisible
+        {
+            get
+            {
+                return LoadingImageGrid.Visibility == Visibility.Visible;
+            }
+            set
+            {
+                LoadingImageGrid.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
         public TradingViewControl()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
@@ -39,7 +51,7 @@ namespace UndergroundIRO.TradingViewKit.Wpf
                     bitmap.EndInit();
                     img.Stretch = Stretch.Fill;
                     img.Source = bitmap;
-                    Content=img;
+                    Content = img;
                 }
                 catch { }
                 return;
@@ -57,7 +69,7 @@ namespace UndergroundIRO.TradingViewKit.Wpf
                 {
                     await tv.XWV.ThreadSync.InvokeAsync(() =>
                     {
-                        LoadingImageGrid.Visibility = System.Windows.Visibility.Visible;
+                        LoadSplashScreenVisible = true;
                     });
                 }
             };
@@ -66,7 +78,7 @@ namespace UndergroundIRO.TradingViewKit.Wpf
             {
                 await tv.XWV.ThreadSync.InvokeAsync(() =>
                 {
-                    LoadingImageGrid.Visibility = Visibility.Collapsed;
+                    LoadSplashScreenVisible = false;
                 });
             };
         }

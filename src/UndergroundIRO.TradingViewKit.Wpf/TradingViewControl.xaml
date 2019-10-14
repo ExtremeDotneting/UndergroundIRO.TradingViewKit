@@ -10,7 +10,7 @@
         <ContentControl x:Name="BrowserPlace"></ContentControl>
         <Grid x:Name="LoadingImageGrid" Background="White" >
             <Image x:Name="loadImg" gif:ImageBehavior.AnimatedSource="/UndergroundIRO.TradingViewKit.Wpf;component/loading.gif" 
-                       gif:ImageBehavior.RepeatBehavior="20x"
+                       gif:ImageBehavior.RepeatBehavior="200x"
                        Stretch="Fill" Height="380" HorizontalAlignment="Center" Margin="10" Width="380" VerticalAlignment="Center"/>
         </Grid>
 
