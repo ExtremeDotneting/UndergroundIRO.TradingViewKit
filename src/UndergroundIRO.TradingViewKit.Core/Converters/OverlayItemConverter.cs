@@ -4,11 +4,11 @@ using Newtonsoft.Json.Linq;
 
 namespace UndergroundIRO.TradingViewKit.Core.Entities
 {
-    public class  TradingOverlayItemConverter : JsonConverter
+    public class  OverlayItemConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var obj = (TradingOverlayItem)value;
+            var obj = (OverlayItem)value;
             var arr = new object[]
             {
                (long)obj.DateTime.ToUniversalDateTime(),
@@ -20,13 +20,13 @@ namespace UndergroundIRO.TradingViewKit.Core.Entities
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            if (objectType != typeof(TradingOverlayItem))
+            if (objectType != typeof(OverlayItem))
             {
                 throw new NotImplementedException("Custom json converter wrong type.");
             }
             JToken jToken = JToken.Load(reader);
             var arr = jToken.ToObject<double[]>();
-            var res = new TradingOverlayItem();
+            var res = new OverlayItem();
             if (arr.Length > 0)
                 res.DateTime = TimeExtensions.FromUniversalDateTime(arr[0]);
             if (arr.Length > 1)
@@ -41,7 +41,7 @@ namespace UndergroundIRO.TradingViewKit.Core.Entities
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(TradingOverlayItem);
+            return objectType == typeof(OverlayItem);
         }
     }
 }

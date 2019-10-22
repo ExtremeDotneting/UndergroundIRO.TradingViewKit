@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 
 namespace UndergroundIRO.TradingViewKit.Core.Entities
 {
-    [JsonConverter(typeof(TradingOverlayItemConverter))]
-    public class TradingOverlayItem
+    [JsonConverter(typeof(OverlayItemConverter))]
+    public class OverlayItem
     {
         public DateTime DateTime { get; set; }
 
