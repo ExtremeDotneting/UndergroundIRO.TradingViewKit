@@ -26,7 +26,7 @@
         methods: {
             onResize(event) {
                 this.width = window.innerWidth;
-                this.height = window.innerHeight-5;
+                this.height = window.innerHeight - 5;
             }
         },
         mounted() {
@@ -34,12 +34,25 @@
             window["TradingVueObj"] = this.$refs.tradingVue;
             this.$refs.tradingVue.titleTxt = "";
             this.onResize();
+            setInterval(function () {
+                var tv = window["TradingVueObj"];
+                var ctx = window["TradingViewContext"];
+                var range = tv.getRange();               
+                if (range[0] != ctx.currentRangeStart || range[1] != ctx.currentRangeEnd) {
+                    ctx.currentRangeStart = range[0];
+                    ctx.currentRangeEnd = range[1];
+                    if(window.timeRangeUpdated)
+                        window.timeRangeUpdated(ctx.currentRangeStart, ctx.currentRangeEnd);
+                }
+            }, 50);
         },
         beforeDestroy() {
             window.removeEventListener("resize", this.onResize);
         },
         data() {
             window["TradingViewContext"] = {
+                currentRangeStart: 0,
+                currentRangeEnd: 0,
                 chart: Data,
                 width: window.innerWidth,
                 height: window.innerHeight,

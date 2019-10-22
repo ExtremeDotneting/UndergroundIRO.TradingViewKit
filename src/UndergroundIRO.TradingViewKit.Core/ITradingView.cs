@@ -33,6 +33,8 @@ namespace UndergroundIRO.TradingViewKit.Core
         /// </summary>
         event Func<ITradingView, ViewRefreshType, Task> Refreshed;
 
+        event Action<ITradingView, TimeRangeChangedEventArgs> TimeRangeChanged;
+
         void Dispose();
 
         Task RefreshAsync(ViewRefreshType viewRefreshType = ViewRefreshType.NotReloadIfCached);
@@ -47,6 +49,6 @@ namespace UndergroundIRO.TradingViewKit.Core
 
         Task SetTimeRange(long fromNum, long toNum);
 
-       
+        Task<(DateTime StartTime, DateTime EndTime)> GetTimeRange();
     }
 }

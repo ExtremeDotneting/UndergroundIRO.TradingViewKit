@@ -11,7 +11,7 @@ namespace UndergroundIRO.TradingViewKit.Core
 
         public static DateTime FromUniversalDateTime(double milliseconds)
         {
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(milliseconds).ToLocalTime();
+            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(milliseconds);
         }
     }
 }

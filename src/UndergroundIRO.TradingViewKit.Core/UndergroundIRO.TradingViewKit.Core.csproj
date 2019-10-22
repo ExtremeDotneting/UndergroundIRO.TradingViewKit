@@ -10,6 +10,10 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);**/node_modules/**;</DefaultItemExcludes>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="TradingVueApp\**" />
     <None Remove="TradingVueApp\node_modules\**" />
@@ -19,7 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IRO.EmbeddedResources" Version="1.1.0" />
-    <PackageReference Include="IRO.XWebView.Core" Version="1.1.3" />
+    <PackageReference Include="IRO.XWebView.Core" Version="1.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 

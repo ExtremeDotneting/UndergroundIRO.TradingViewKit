@@ -21,7 +21,6 @@ namespace UndergroundIRO.TradingViewKit.Core
     {
         #region Static.
         static string UnpackedToPath { get; set; }
-
         public static bool IsUnpacked { get; set; }
 
         /// <summary>
@@ -47,17 +46,15 @@ namespace UndergroundIRO.TradingViewKit.Core
         string _previousRefreshJson;
 
         public IXWebView XWV { get; }
-
         public virtual TradingViewContext TypedContext { get; set; }
-
         public bool IsDisposed { get; set; }
-
         public bool LoopRefreshEnabled { get; set; } = true;
-
         /// <summary>
         /// Default is 50 ms.
         /// </summary>
         public TimeSpan LoopRefreshTimeout { get; set; } = TimeSpan.FromMilliseconds(50);
+
+        public event Action<ITradingView, TimeRangeChangedEventArgs> TimeRangeChanged;
 
         public TradingView(IXWebView xwv)
         {
@@ -86,6 +83,21 @@ namespace UndergroundIRO.TradingViewKit.Core
             });
             thread.Priority = ThreadPriority.BelowNormal;
             thread.Start();
+            Action<double, double> timeRangeChangedHandler = (double startTime, double endTime) =>
+            {
+                var startDateTime = TimeExtensions.FromUniversalDateTime(startTime);
+                var endDateTime = TimeExtensions.FromUniversalDateTime(endTime);
+                var args=new TimeRangeChangedEventArgs()
+                {
+                    StartTime = startDateTime,
+                    EndTime = endDateTime
+                };
+                XWV.ThreadSync.Invoker.Invoke(() =>
+                {
+                    TimeRangeChanged?.Invoke(this, args); 
+                });
+            };
+            xwv.BindToJs(timeRangeChangedHandler, "timeRangeUpdated", "window");
         }
 
         public void Dispose()
@@ -160,6 +172,18 @@ TradingVueObj.setRange({fromNum},{toNum});
             await XWV.ExJs<object>(script);
         }
 
+        public async Task<(DateTime StartTime, DateTime EndTime)> GetTimeRange()
+        {
+
+            var script = $@"
+return TradingVueObj.getRange();
+";
+            var arr=await XWV.ExJs<double[]>(script);
+            var startDT = TimeExtensions.FromUniversalDateTime(arr[0]);
+            var endDT = TimeExtensions.FromUniversalDateTime(arr[1]);
+            return (startDT, endDT);
+        }
+
         async Task LoadPageIfNotLoaded()
         {
             var isLoadedScript = @"
@@ -180,6 +204,7 @@ return false;
                 UnpackedToPath + "/dist/index.html"
             );
             await XWV.LoadUrl(path);
+            await XWV.AttachBridge();
         }
 
         #region Awaitable events.
