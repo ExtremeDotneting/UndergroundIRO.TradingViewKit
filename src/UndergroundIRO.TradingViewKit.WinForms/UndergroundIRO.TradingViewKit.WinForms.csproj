@@ -65,7 +65,7 @@
       <Version>75.1.142</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>75.1.142</Version>
+      <Version>86.0.241</Version>
     </PackageReference>
     <PackageReference Include="IRO.XWebView.CefSharp.WinForms">
       <Version>1.1.5</Version>
