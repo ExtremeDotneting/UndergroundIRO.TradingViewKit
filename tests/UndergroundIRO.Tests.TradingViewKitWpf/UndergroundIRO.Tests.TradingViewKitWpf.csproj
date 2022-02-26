@@ -104,7 +104,7 @@
       <Version>75.1.142</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.OffScreen">
-      <Version>75.1.142</Version>
+      <Version>98.1.210</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.Wpf">
       <Version>75.1.142</Version>
