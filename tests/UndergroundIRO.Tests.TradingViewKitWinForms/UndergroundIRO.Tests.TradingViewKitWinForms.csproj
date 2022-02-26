@@ -101,7 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>75.1.142</Version>
+      <Version>98.1.210</Version>
     </PackageReference>
     <PackageReference Include="IRO.XWebView.CefSharp.WinForms">
       <Version>1.1.5</Version>
