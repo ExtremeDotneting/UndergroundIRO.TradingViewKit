@@ -107,7 +107,7 @@
       <Version>75.1.142</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.Wpf">
-      <Version>75.1.142</Version>
+      <Version>98.1.210</Version>
     </PackageReference>
     <PackageReference Include="IRO.XWebView.CefSharp.Wpf">
       <Version>1.1.5</Version>
