@@ -12,7 +12,7 @@
     "jsoneditor": "^6.4.1",
     "trading-vue-js": "^0.3.10",
     "vue": "^2.6.10",
-    "vuetify": "^2.0.0"
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
